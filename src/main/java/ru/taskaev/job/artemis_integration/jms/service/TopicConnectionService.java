@@ -7,10 +7,8 @@ import org.springframework.stereotype.Service;
 import ru.taskaev.job.artemis_integration.jms.consumer.AbstractListener;
 
 import javax.annotation.PostConstruct;
-import javax.jms.Connection;
-import javax.jms.ConnectionFactory;
-import javax.jms.JMSException;
-import javax.jms.TopicConnection;
+import javax.annotation.PreDestroy;
+import javax.jms.*;
 import java.util.List;
 
 @Service
@@ -21,15 +19,39 @@ public class TopicConnectionService {
     private final List<AbstractListener> listeners;
     private final ConnectionFactory factory;
 
-    private Connection connection;
+    private TopicConnection topicConnection;
 
     @PostConstruct
     public void myTopicConnectionFactory() throws JMSException {
         ActiveMQConnectionFactory artemisFactory = (ActiveMQConnectionFactory) factory;
-        artemisFactory.setUser()
+        artemisFactory.setClientID("BSB");
 
-        TopicConnection topicConnection = artemisFactory.createTopicConnection();
+        topicConnection = artemisFactory.createTopicConnection();
+        topicConnection.start();
+        for (AbstractListener l : listeners) {
+            l.initSession(topicConnection);
+        }
+    }
 
+    @PreDestroy
+    public void destroy() {
+        for (AbstractListener listener : listeners) {
+            TopicSubscriber subscriber = listener.getSubscriber();
+            TopicSession session = listener.getSession();
+            try {
+                subscriber.close();
+                session.close();
+            } catch (Exception e) {
+                log.error(e.getLocalizedMessage(), e);
+            }
+        }
+        if (topicConnection != null) {
+            try {
+                topicConnection.close();
+            } catch (Exception e) {
+                log.error(e.getLocalizedMessage(), e);
+            }
+        }
     }
 
 

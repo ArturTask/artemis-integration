@@ -2,11 +2,18 @@ spring:
   application:
     name: artemis-integration
   jms:
+    pub-sub-domain: true
     cache:
-      session-cache-size: 10
-      enabled: true
+      enabled: false
+  #      session-cache-size: 10
+#      enabled: true
   artemis:
     host: localhost
     port: 61616
     user: admin
     password: admin
+
+app:
+  topicName: topic-test-name
+  subscription: sub-1
+  messageSelector:

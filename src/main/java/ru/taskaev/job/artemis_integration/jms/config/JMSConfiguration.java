@@ -1,9 +1,13 @@
 package ru.taskaev.job.artemis_integration.jms.config;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jms.annotation.EnableJms;
+import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
+import org.springframework.jms.config.JmsListenerContainerFactory;
 import org.springframework.jms.connection.JmsTransactionManager;
+import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.jms.ConnectionFactory;
 
@@ -16,6 +20,23 @@ public class JMSConfiguration {
     public JmsTransactionManager jmsTransactionManager(ConnectionFactory connectionFactory) {
         return new JmsTransactionManager(connectionFactory);
     }
+
+//    @Bean
+//    public JmsListenerContainerFactory transactionalListenerContainerFactory(ConnectionFactory connectionFactory, JmsTransactionManager jmsTransactionManager) {
+//        DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
+//        factory.setConnectionFactory(connectionFactory);
+//
+//        // включаем транзакции JMS
+//        factory.setSessionTransacted(true);
+//        factory.setTransactionManager(jmsTransactionManager);
+//        factory.setErrorHandler(throwable -> System.out.println("[ERROR] " + throwable.getMessage()));
+//
+//        // concurrency
+//        factory.setConcurrency("1-5");
+//
+//        return factory;
+//    }
+
 
 
 //    @Bean
