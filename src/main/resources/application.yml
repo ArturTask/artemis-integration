@@ -2,18 +2,20 @@ spring:
   application:
     name: artemis-integration
   jms:
-    pub-sub-domain: true
+    pub-sub-domain: false
     cache:
       enabled: false
-  #      session-cache-size: 10
 #      enabled: true
-  artemis:
-    host: localhost
-    port: 61616
-    user: admin
-    password: admin
+  #      session-cache-size: 10
 
 app:
-  topicName: topic-test-name
-  subscription: sub-1
-  messageSelector:
+  artemis:
+    brokerUrl: tcp://localhost:61616  # example: tcp://replica-1.dev.ru:5672,tcp://replica-2.dev.ru:5672
+    user: artemis
+    password: artemis
+    clientId: ArtemisIntegration
+
+
+logging:
+  level:
+    root: info
