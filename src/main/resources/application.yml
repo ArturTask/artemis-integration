@@ -2,11 +2,11 @@ spring:
   application:
     name: artemis-integration
   jms:
-    pub-sub-domain: true
+    pub-sub-domain: true # true=topic, false=queue
     cache:
-      enabled: false
+      enabled: false # disable cache => connectionFactory won't be wrapped in CachingConnectionFactory (spring class)
   #      session-cache-size: 10
-#      enabled: true
+
   artemis:
     host: localhost
     port: 61616
