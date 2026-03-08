@@ -15,7 +15,9 @@
     <description>artemis-integration</description>
 
     <properties>
-        <java.version>1.8</java.version>
+        <java.version>17</java.version>
+        <!-- also works with java 8 -->
+    <!-- <java.version>1.8</java.version>-->
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
     </properties>

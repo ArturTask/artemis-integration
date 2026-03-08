@@ -3,6 +3,8 @@ package ru.taskaev.job.artemis_integration.jms.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.activemq.artemis.jms.client.ActiveMQConnectionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import ru.taskaev.job.artemis_integration.jms.consumer.AbstractListener;
 
@@ -17,14 +19,17 @@ import java.util.List;
 public class TopicConnectionService {
 
     private final List<AbstractListener> listeners;
-    private final ConnectionFactory factory;
+
+    @Autowired()
+    @Qualifier("jmsConnectionFactory")
+    private ConnectionFactory factory;
 
     private TopicConnection topicConnection;
 
     @PostConstruct
     public void myTopicConnectionFactory() throws JMSException {
         ActiveMQConnectionFactory artemisFactory = (ActiveMQConnectionFactory) factory;
-        artemisFactory.setClientID("BSB");
+        artemisFactory.setClientID("test");
 
         topicConnection = artemisFactory.createTopicConnection();
         topicConnection.start();

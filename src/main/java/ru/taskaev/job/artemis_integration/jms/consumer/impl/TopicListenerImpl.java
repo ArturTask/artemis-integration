@@ -9,7 +9,7 @@ import javax.jms.JMSException;
 import javax.jms.Message;
 
 @Component
-//@Slf4j
+@Slf4j
 public class TopicListenerImpl extends AbstractListener {
 
     @Value("${app.topicName}")
@@ -26,8 +26,7 @@ public class TopicListenerImpl extends AbstractListener {
 
     @Override
     public void onMessage(Message message) {
-//        log.info("Message from topic: {}", message);
-        System.out.println(message);
+        log.info("[TECH] [INFO] incoming message {} ", message);
         try {
             message.acknowledge();
         } catch (JMSException e) {

@@ -14,7 +14,7 @@ public abstract class AbstractListener implements MessageListener {
 
     public void initSession(TopicConnection connection) throws JMSException {
         ListenerInfo info = getListenerInfo();
-        log.info("[tech] [INFO] Starting session topic name = {}", info.getTopicName());
+        log.info("[TECH] [INFO] Starting session topic name = {}", info.getTopicName());
         this.session = connection.createTopicSession(false, Session.AUTO_ACKNOWLEDGE);
         Topic topic = session.createTopic(info.getTopicName());
         // вообще  noLocal = true это добалвяет фильтр в очередь внутри топика которая фильтрует чтобы сообщения которые созданы под тем же clientId не были прочитаны в нашем onMessage
