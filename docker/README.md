@@ -1,4 +1,4 @@
-# Simple artemis example
+# Artemis 2 instances example
 
 ## Quickstart
 ```
@@ -9,10 +9,17 @@ docker-compose -f ./docker-compose.yml up -d
 docker-compose -f ./docker-compose.yml down --remove-orphans
 ```
 
-и еще обязательно секуию ошибок посмотреть у них баг - по дефолту не отправить сообщение в очередь
+и еще обязательно секцию ошибок посмотреть у них баг - по дефолту не отправить сообщение в очередь
 
 **Console:**
-http://localhost:8161/console/artemis
+- artemis_1 - http://localhost:8161
+- artemis_2 - http://localhost:8162
+
+**Connections**
+- artemis_1 - http://localhost:61616
+- artemis_2 - http://localhost:61617
+
+
 login: admin (вообще default=artemis)
 password: admin (вообще default=artemis)
 
