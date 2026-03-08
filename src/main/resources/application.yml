@@ -11,9 +11,8 @@ spring:
 app:
   artemis:
     brokerUrl: tcp://localhost:61616  # example: tcp://replica-1.dev.ru:5672,tcp://replica-2.dev.ru:5672
-    user: artemis
-    password: artemis
-    clientId: ArtemisIntegration
+    user: admin
+    password: admin
 
 
 logging:

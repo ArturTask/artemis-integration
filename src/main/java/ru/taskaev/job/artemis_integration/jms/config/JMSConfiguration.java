@@ -50,12 +50,14 @@ public class JMSConfiguration {
                 "retryInterval=300&" +                  // Время ожидания между переключениями
                 "retryIntervalMultiplier=1.3&" +        // Множитель время ожидания между переключениями
                 "maxRetryInterval=2000&" +              // Максимальное время ожидания между переключениями
-                "sslEnabled=true";                      // Подключение осуществляется по TLS
+                "sslEnabled=false";                      // Подключение осуществляется по TLS
 
         ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory(connectionString);
         connectionFactory.setUser(properties.getUser());
         connectionFactory.setPassword(properties.getPassword());
-        connectionFactory.setClientID(properties.getClientId());
+        // don't set client id because we use this factory in producer (JmsTemplate) and consumers
+        // each connection MUST HAVE unique clientId
+//        connectionFactory.setClientID(properties.getClientId());
 
         return connectionFactory;
     }

@@ -11,6 +11,5 @@ public class ArtemisProperties {
     private String brokerUrl = "tcp://localhost:61616";
     private String user = "artemis";
     private String password = "artemis";
-    private String clientId = "ArtemisIntegration";
 
 }
