@@ -1,14 +1,10 @@
 package ru.taskaev.job.artemis_integration.jms.consumer;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.jms.*;
-import java.util.HashMap;
-import java.util.Map;
 
 @Slf4j
 @Getter
