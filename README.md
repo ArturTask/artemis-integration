@@ -39,8 +39,11 @@
 
 * special for **java** 8
 * `@JmsListener`
-* custom spring factory beans configuration (using tls, tcp)
+* custom spring factory beans configuration, connection to Artemis cluster
+* using tcp, **can use tls** when `sslEnabled=true` (now `=false`) in method `artemisConnectionFactory`
+  of [JMSConfiguration](src%2Fmain%2Fjava%2Fru%2Ftaskaev%2Fjob%2Fartemis_integration%2Fjms%2Fconfig%2FJMSConfiguration.java)
 * without `spring-boot-starter-artemis`
+* Scheduler with `JmsTemplate` sending messages to queue
 
 # Quickstart
 
@@ -50,7 +53,8 @@
   docker-compose -f docker/docker-compose.yml up -d
 ```
 
-2) run app [ArtemisIntegrationApplication](src%2Fmain%2Fjava%2Fru%2Ftaskaev%2Fjob%2Fartemis_integration%2FArtemisIntegrationApplication.java)
+2) run
+   app [ArtemisIntegrationApplication](src%2Fmain%2Fjava%2Fru%2Ftaskaev%2Fjob%2Fartemis_integration%2FArtemisIntegrationApplication.java)
 
 3) send messages using admin console
 
@@ -58,12 +62,11 @@ go to http://localhost:8161 or http://localhost:8162
 
 login: `admin`, password: `admin`
 
-* choose `Artemis` in left sidebar (`{baseUrl}/console/artemis`) 
+* choose `Artemis` in left sidebar (`{baseUrl}/console/artemis`)
 * choose `Addresses` in artemis tabs (at the top of the page)
 * choose address (e.g. `lolQueue`)
-* click `...` on the right side of address's div 
+* click `...` on the right side of address's div
 * choose `Send Message` from dropdown list
-* insert message text, choose format=`plaintext` and click on `send` button 
-
+* insert message text, choose format=`plaintext` and click on `send` button
 
 Now you will see your messages in app logs
